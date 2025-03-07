@@ -1,0 +1,20 @@
+#todos-container {
+  display: flex;
+  height: 80vh;
+  background-color: black;
+}
+
+#todos-container .list {
+  width: 33.33%;
+  height: 100%;
+}
+
+#not-started-list {
+  background-color: aliceblue;
+}
+#in-progress-list{
+  background-color: azure;
+}
+#completed-list{
+  background-color: cornsilk;
+}

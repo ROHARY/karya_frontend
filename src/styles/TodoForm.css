@@ -1,0 +1,22 @@
+#todo-form {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#todo-form input {
+  width: 90%;
+  height: 30px;
+  margin-right: 20px;
+}
+
+#todo-form button {
+  height: 35px;
+  width: 100px;
+  color: white;
+  background-color:black;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}

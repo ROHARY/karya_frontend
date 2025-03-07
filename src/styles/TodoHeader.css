@@ -1,0 +1,15 @@
+#todo-header {
+  display: flex;
+}
+
+#todo-header-title{
+  width: 40%;
+  padding: 0 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#todo-form-container{
+  width: 60%;
+}
+
+

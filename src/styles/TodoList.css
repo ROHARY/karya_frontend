@@ -1,0 +1,14 @@
+#label-container{
+  padding: 20px 0;
+  border-bottom: 1px dashed black;
+  margin: 0 20px;
+  text-align: center;
+}
+
+#todo-list-label{
+  margin: 0;
+}
+
+#todos {
+  padding: 10px 20px;
+}
