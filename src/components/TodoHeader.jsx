@@ -5,7 +5,7 @@ const TodoHeader = () => {
   return (
     <div id="todo-header">
       <div id="todo-header-title">
-        <h1>Todos</h1>
+        <h1>RNA Todos</h1>
       </div>
       <div id="todo-form-container">
         <TodoForm></TodoForm>
