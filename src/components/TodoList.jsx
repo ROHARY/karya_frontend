@@ -1,7 +1,7 @@
 import '../styles/TodoList.css'
 import Todo from './Todo'
 
-const TodoList = ({ label}) => {
+const TodoList = ({ label, todos }) => {
 
   return (
     <div id="todo-list">
@@ -9,9 +9,7 @@ const TodoList = ({ label}) => {
         <h2 id="todo-list-label">{label}</h2>
       </div>
       <div id="todos">
-        <Todo text="Aryan"></Todo>
-        <Todo text="Aryan"></Todo>
-        <Todo text="Aryan"></Todo>
+        { todos.map( todo => (<Todo key={todo._id} todo={todo}></Todo> )) }
       </div>
     </div>
   )
