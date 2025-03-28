@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
-import '../styles/TodoForm.css'
-import todoService from '../services/todoService'
-import EditContext from "../contexts/EditContext"
+import '../../styles/todos/TodoForm.css'
+import todoService from '../../services/todoService'
+import EditContext from "../../contexts/EditContext"
 
 const TodoForm = () => {
 

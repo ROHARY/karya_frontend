@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
-import '../styles/Todo.css'
-import EditContext from '../contexts/EditContext'
-import todoService from '../services/todoService'
+import '../../styles/todos/Todo.css'
+import EditContext from '../../contexts/EditContext'
+import todoService from '../../services/todoService'
 
 const Todo = ({ todo }) => {
 

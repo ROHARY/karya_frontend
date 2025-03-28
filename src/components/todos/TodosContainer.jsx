@@ -1,9 +1,9 @@
 
 import TodoList from './TodoList'
-import '../styles/TodosContainer.css'
+import '../../styles/todos/TodosContainer.css'
 import { useContext } from 'react'
 
-import EditContext from '../contexts/EditContext'
+import EditContext from '../../contexts/EditContext'
 
  const TodosContainer = () => {
 

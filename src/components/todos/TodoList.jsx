@@ -1,4 +1,4 @@
-import '../styles/TodoList.css'
+import '../../styles/todos/TodoList.css'
 import Todo from './Todo'
 
 const TodoList = ({ label, todos }) => {
