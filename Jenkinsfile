@@ -8,11 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/ROHARY/karya_frontend.git'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
