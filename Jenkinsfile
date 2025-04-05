@@ -30,7 +30,7 @@ pipeline {
                     sh "docker rm ${IMAGE_NAME} || true"
 
                     // Run new container with name
-                    sh "docker run -d -p ${HOST_PORT}:${CONTAINER_PORT} ${IMAGE_NAME}:latest"
+                    sh "docker run -d -p ${HOST_PORT}:${CONTAINER_PORT} --name ${IMAGE_NAME} ${IMAGE_NAME}:latest"
                 }
             }
         }
