@@ -1,9 +1,13 @@
 const serviceUrls = {
   development: {
-    todo: 'http://127.0.0.1:3003/todos'
+    todo: 'http://localhost:3003/todos',
+    user: 'http://localhost:3003/users',
+    signup: 'http://localhost:3003/users'
   },
   production: {
-
+    todo: 'https://localhost:3003/todos',
+    user: 'http://localhost:3003/users',
+    signup:'https://localhost:3003/users'
   }
 }
 
