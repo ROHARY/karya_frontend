@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
-import '../styles/TodoEdit.css'
-import EditContext from '../contexts/EditContext'
-import todoService from '../services/todoService'
+import '../../styles/todos/TodoEdit.css'
+import EditContext from '../../contexts/EditContext'
+import todoService from '../../services/todoService'
 
 const TodoEdit = ({ todo }) => {
   const { setEditMode, todosDispatch } = useContext(EditContext)

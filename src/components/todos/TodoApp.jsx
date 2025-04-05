@@ -2,9 +2,9 @@ import TodoHeader from "./TodoHeader"
 import TodosContainer from "./TodosContainer"
 import TodoEdit from "./TodoEdit"
 import { useState, useEffect, useReducer } from "react"
-import EditContext from "../contexts/EditContext"
-import todoService from "../services/todoService"
-import todosReducer from "../reducers/todosReducer"
+import EditContext from "../../contexts/EditContext"
+import todoService from "../../services/todoService"
+import todosReducer from "../../reducers/todosReducer"
 
 const initialState = {
   notStartedTodos: [],
