@@ -19,7 +19,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh 'docker run -d -p 8080:80 karya_frontend:latest'
+                    sh 'docker run -d -p 3334:80 karya_frontend:latest'
                 }
             }
         }
