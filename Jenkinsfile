@@ -25,6 +25,11 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
+                    // Stop old container if exists
+                    sh "docker stop ${IMAGE_NAME} || true"
+                    sh "docker rm ${IMAGE_NAME} || true"
+
+                    // Run new container with name
                     sh "docker run -d -p ${HOST_PORT}:${CONTAINER_PORT} ${IMAGE_NAME}:latest"
                 }
             }
