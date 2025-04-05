@@ -1,5 +1,5 @@
 import SignUpPage from "./components/sign_in/SignUp";
-import TodoApp from "./components/TodoApp";
+import TodoApp from "./components/todos/TodoApp";
 import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
