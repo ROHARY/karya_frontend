@@ -1,18 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import SignUpPage from "./components/sign_in/SignUp";
 import TodoApp from "./components/todos/TodoApp";
-import SignUp from "./components/authentication/SignUp";
+import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/todos" element={<TodoApp/>}></Route>
-          <Route path="/signup" element={<SignUp/>}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route index element={<SignUpPage></SignUpPage>}></Route>
+            <Route path="todos" element={<TodoApp></TodoApp>}></Route>
+          </Routes>
+        </Router>
+      </div>
+    </Provider>
   );
 }
-
 export default App;
