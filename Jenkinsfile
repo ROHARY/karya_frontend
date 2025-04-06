@@ -39,8 +39,29 @@ pipeline {
             steps {
                 script {
                     def fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${IMAGE_TAG}"
+                    def taskDefinition = 'karya-frontend-task' // name of your task def family
 
-                    // Register new task definition with updated image
+                    // Fetch existing task def and update container image
+                    sh """
+                    aws ecs describe-task-definition \
+                        --task-definition ${taskDefinition} \
+                        --region ${AWS_REGION} \
+                        > task-def.json
+                    """
+
+                    sh """
+                    jq '.taskDefinition.containerDefinitions[0].image = "${fullImageName}" |
+                        {family: .taskDefinition.family, containerDefinitions: .taskDefinition.containerDefinitions}' \
+                        task-def.json > new-task-def.json
+                    """
+
+                    sh """
+                    aws ecs register-task-definition \
+                        --cli-input-json file://new-task-def.json \
+                        --region ${AWS_REGION}
+                    """
+
+                    // Force new deployment
                     sh """
                     aws ecs update-service \
                         --cluster RoharyCluster \
