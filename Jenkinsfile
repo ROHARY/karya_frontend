@@ -39,9 +39,8 @@ pipeline {
             steps {
                 script {
                     def fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${IMAGE_TAG}"
-                    def taskDefinition = 'RoharyTask' // name of your task def family
+                    def taskDefinition = 'RoharyTask'
 
-                    // Fetch existing task def and update container image
                     sh """
                     aws ecs describe-task-definition \
                         --task-definition ${taskDefinition} \
@@ -51,7 +50,7 @@ pipeline {
 
                     sh """
                     jq '
-                        {
+                    {
                         family: .taskDefinition.family,
                         taskRoleArn: .taskDefinition.taskRoleArn,
                         executionRoleArn: .taskDefinition.executionRoleArn,
@@ -66,28 +65,31 @@ pipeline {
                         requiresCompatibilities: .taskDefinition.requiresCompatibilities,
                         cpu: .taskDefinition.cpu,
                         memory: .taskDefinition.memory
-                        }
-                    ' task-def.json > new-task-def.json
+                    }' task-def.json > new-task-def.json
                     """
 
+                    def newTaskDefArn = sh(
+                        script: """
+                            aws ecs register-task-definition \
+                                --cli-input-json file://new-task-def.json \
+                                --region ${AWS_REGION} \
+                                --query 'taskDefinition.taskDefinitionArn' \
+                                --output text
+                        """,
+                        returnStdout: true
+                    ).trim()
 
                     sh """
-                    aws ecs register-task-definition \
-                        --cli-input-json file://new-task-def.json \
-                        --region ${AWS_REGION}
-                    """
-
-                    // Force new deployment
-                    sh """
-                    aws ecs update-service \
-                        --cluster RoharyCluster \
-                        --service RoharyService \
-                        --force-new-deployment \
-                        --region ${AWS_REGION}
+                        aws ecs update-service \
+                            --cluster RoharyCluster \
+                            --service RoharyService \
+                            --task-definition ${newTaskDefArn} \
+                            --region ${AWS_REGION}
                     """
                 }
             }
         }
+
 
     }
 }
