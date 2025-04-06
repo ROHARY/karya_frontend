@@ -50,8 +50,8 @@ pipeline {
                     """
 
                     sh """
-                    jq '.taskDefinition.containerDefinitions[0].image = "${fullImageName}" |
-                        {family: .taskDefinition.family, containerDefinitions: .taskDefinition.containerDefinitions}' \
+                     jq '.taskDefinition
+                        | .containerDefinitions[0].image = "${fullImageName}"' \
                         task-def.json > new-task-def.json
                     """
 
