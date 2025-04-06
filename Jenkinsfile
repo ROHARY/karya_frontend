@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     def fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${IMAGE_TAG}"
-                    def taskDefinition = 'karya-frontend-task' // name of your task def family
+                    def taskDefinition = 'RoharyTask' // name of your task def family
 
                     // Fetch existing task def and update container image
                     sh """
