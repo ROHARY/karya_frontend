@@ -50,10 +50,26 @@ pipeline {
                     """
 
                     sh """
-                     jq '.taskDefinition
-                        | .containerDefinitions[0].image = "${fullImageName}"' \
-                        task-def.json > new-task-def.json
+                    jq '
+                        {
+                        family: .taskDefinition.family,
+                        taskRoleArn: .taskDefinition.taskRoleArn,
+                        executionRoleArn: .taskDefinition.executionRoleArn,
+                        networkMode: .taskDefinition.networkMode,
+                        containerDefinitions: (
+                            .taskDefinition.containerDefinitions
+                            | map(if .name == "RoharyContainer"
+                                then .image = "${fullImageName}"
+                                else .
+                                end)
+                        ),
+                        requiresCompatibilities: .taskDefinition.requiresCompatibilities,
+                        cpu: .taskDefinition.cpu,
+                        memory: .taskDefinition.memory
+                        }
+                    ' task-def.json > new-task-def.json
                     """
+
 
                     sh """
                     aws ecs register-task-definition \
