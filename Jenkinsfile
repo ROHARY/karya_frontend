@@ -35,5 +35,22 @@ pipeline {
             }
         }
 
+        stage('Deploy to ECS') {
+            steps {
+                script {
+                    def fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${IMAGE_TAG}"
+
+                    // Register new task definition with updated image
+                    sh """
+                    aws ecs update-service \
+                        --cluster RoharyCluster \
+                        --service RoharyService \
+                        --force-new-deployment \
+                        --region ${AWS_REGION}
+                    """
+                }
+            }
+        }
+
     }
 }
