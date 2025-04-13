@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {signUpThunk as singUp} from '../../redux/slices/user'
 
 const SignUpPage = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   // State to hold form values
-  const currentUser = useSelector((state)=> state.user)
-  const [formData, setFormData] = useState(currentUser);
+  const currentContext = useSelector((state)=> state.currentContext)
+  const user = useSelector((data)=> data.user)
+  const [formData, setFormData] = useState(user);
 
   // State to hold validation errors
   const [errors, setErrors] = useState({
@@ -26,6 +26,19 @@ const SignUpPage = () => {
       [name]: value,
     }));
   };
+
+  const fillDummyDetails = (e)=>{
+    e.preventDefault()
+    setFormData((prevData)=>{
+      return {
+        ...prevData,
+        firstName: 'Morgan',
+        lastName: 'Stanley',
+        email: 'aryanz7027@gmail.com',
+        password: 'welcome@123',
+      }
+    })
+  }
 
   // Simple validation function
   const validate = () => {
@@ -54,10 +67,7 @@ const SignUpPage = () => {
       // Here you can make an API call to submit the form data
     }
     dispatch(singUp(formData))
-    // navigate('/todo')
-
   };
-
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -115,20 +125,23 @@ const SignUpPage = () => {
               />
               {errors.password && <div className="text-danger">{errors.password}</div>}
             </div>
-
-
-            <button type="submit" className="btn btn-primary w-100" disabled={currentUser.pending}>
-              {currentUser.pending ? (
-                <div className="d-flex justify-content-center">
-                  <div className="spinner-border text-light" role="status">
-                    <span className="visually-hidden">Loading...</span>
+            <div className='d-flex gap-2'>
+              <button type="submit" className="btn btn-primary w-100" disabled={user.pending}>
+                {user.pending ? (
+                  <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                'Sign Up'
-              )}
-            </button>
-           { currentUser.isLoggedIn && <Navigate to="/todos" state={{na:'test'}} replace={true} />}
+                ) : (
+                  'Sign Up'
+                )}
+              </button>
+              <button className="btn btn-secondary w-50" disabled={user.pending} onClick={fillDummyDetails}>
+                Fill Dummy Details
+              </button>
+            </div>
+           { user.isLoggedIn && <Navigate to="/dashboard" state={{na:'test'}} replace={true} />}
           </form>
         </div>
       </div>

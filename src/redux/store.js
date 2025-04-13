@@ -3,6 +3,7 @@ import reducers from './slices'
 
 export const store = configureStore({
   reducer: {
-    user: reducers.userReducer
+    user: reducers.userReducer,
+    currentContext: reducers.currentContextReducer,
   },
 })

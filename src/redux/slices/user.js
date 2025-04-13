@@ -6,7 +6,7 @@ const signUpThunk = createAsyncThunk('user/signUp',async(payload, {dispatch, get
   console.log('adajsdajdjb')
   const response = await new Promise((res,rej)=>setTimeout(()=>{
     res(payload)
-  }, 3000))
+  }, 2000))
   console.log('xxx',response)
   return payload
 })

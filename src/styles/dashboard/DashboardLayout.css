@@ -1,0 +1,13 @@
+.sidebar-link {
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  background-color: #f0f0f0;
+}
+
+.active-link {
+  background-color: #e2e6ea !important;
+  font-weight: bold;
+}
